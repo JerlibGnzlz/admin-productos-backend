@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
     "outDir": "dist",
     "rootDir": "./src/",
     "experimentalDecorators": true,
