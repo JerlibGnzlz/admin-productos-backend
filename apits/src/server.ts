@@ -21,5 +21,4 @@ export const server = express()
 server.use(express.json())
 
 server.use("/api/products", router)
-// server.use("/api/products/:id", router)
 
