@@ -29,13 +29,14 @@ export const getProductById = async (req: Request, res: Response) => {
 
     const { id } = req.params
     try {
-        const product = await Product.findOne({
-            where: {
-                id
-            }
-        })
 
-        res.json({ data: product })
+        const product = await Product.findByPk(id)
+
+        if (!product) {
+            return res.status(404).json({ error: "Producto no encontrado" })
+        } else {
+            return res.json({ data: product })
+        }
     } catch (error) {
         console.log(error)
     }
