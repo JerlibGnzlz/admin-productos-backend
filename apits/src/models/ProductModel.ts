@@ -9,18 +9,18 @@ class Product extends Model {
     @Column({
         type: DataType.STRING(20)
     })
-    name: string
+    declare name: string
 
     @Column({
         type: DataType.FLOAT
     })
-    price: number
+    declare price: number
 
     @Default(true)
     @Column({
         type: DataType.BOOLEAN
     })
-    active: boolean
+    declare active: boolean
 }
 
 export default Product
