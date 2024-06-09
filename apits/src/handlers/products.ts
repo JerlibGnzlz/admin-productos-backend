@@ -5,9 +5,8 @@ import Product from "../models/ProductModel"
 export const createProduct = async (req: Request, res: Response) => {
 
     try {
-        const product = new Product(req.body)
-        await product.save()
-        res.status(201)
+        const product = await Product.create(req.body)
+        res.json({ data: product })
     } catch (error) {
         console.log(error)
     }
