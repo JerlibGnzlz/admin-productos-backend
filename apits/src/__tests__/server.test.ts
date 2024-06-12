@@ -9,10 +9,10 @@ describe("GET /api", () => {
         const res = await request(server).get("/api")
         expect(res.status).toBe(200)
         expect(res.header["content-type"]).toMatch("application/json")
-        expect(res.body.message).toBe("desde API")
+        expect(res.body.message).toBe("Desde API")
 
-        console.log("RESPUESTA", res.header)
-        console.log("RESPUESTAbody", res.body.message)
+        expect(res.status).not.toBe(400)
+        expect(res.body.message).not.toBe("desde API")
 
     });
 })
