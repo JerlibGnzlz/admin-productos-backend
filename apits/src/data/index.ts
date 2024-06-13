@@ -1,7 +1,8 @@
 import { exit } from "node:process"
 import { db } from "../config/db"
 
-/*TODO:limpia la DB y pasa los test*/
+/* ---------------- ELIMINA LA BASE DE DATOS Y PASO LOS TEST ---------------- */
+
 export const clearDB = async () => {
     try {
         await db.sync({ force: true })

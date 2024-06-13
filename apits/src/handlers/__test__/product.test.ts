@@ -5,11 +5,11 @@ describe("POST /api/products", () => {
     it('Should validated errors', async () => {
         const response = await request(server).post("/api/products").send()
         expect(response.status).toEqual(400)
-        expect(response.body).toHaveProperty("erros")
-        expect(response.body.erros).toHaveLength(4)
+        expect(response.body).toHaveProperty("error")
+        expect(response.body.error).toHaveLength(4)
 
         expect(response.badRequest).toBe(true)
-        expect(response.body.erros).not.toHaveProperty("erros")
+        expect(response.body.error).not.toHaveProperty("error")
     });
 
     it('Should validated that price is > 0', async () => {
@@ -18,10 +18,8 @@ describe("POST /api/products", () => {
             "price": 0,
         })
         expect(response.status).toEqual(400)
-        expect(response.body).toHaveProperty("erros")
-        expect(response.body.erros).not.toHaveLength(2)
-        // expect(0).toBe(0)
-        // expect(0).not.toBe(100)
+        expect(response.body).toHaveProperty("error")
+        expect(response.body.error).not.toHaveLength(2)
     });
 
     it('Should create product', async () => {
@@ -34,6 +32,27 @@ describe("POST /api/products", () => {
         expect(response.body).toHaveProperty("data")
 
         expect(response.status).not.toEqual(400)
-        expect(response.body).not.toHaveProperty("erros")
+        expect(response.body).not.toHaveProperty("error")
+    });
+})
+
+
+describe("GET /api/products", () => {
+
+    it('should check if /api exist', async () => {
+        const response = await request(server).get("/api/products")
+        expect(response.status).not.toBe(404)
+
+    });
+
+    it('should get all products', async () => {
+        const response = await request(server).get("/api/products")
+
+        expect(response.status).toBe(200)
+        expect(response.headers["content-type"]).toMatch(/json/)
+        expect(response.body).toHaveProperty("data")
+
+        expect(response.body).not.toHaveProperty("error")
+        expect(response.status).not.toBe(404)
     });
 })
