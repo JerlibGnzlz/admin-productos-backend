@@ -56,3 +56,11 @@ describe("GET /api/products", () => {
         expect(response.status).not.toBe(404)
     });
 })
+
+describe("GET /api/products/:id", () => {
+
+    it('should get a product by Id', async () => {
+        const response = await request(server).get("/api/products")
+
+    });
+})
