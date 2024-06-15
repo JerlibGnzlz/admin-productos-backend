@@ -1,7 +1,5 @@
 import request from 'supertest';
 import { connectDB, server } from "../server";
-import { header } from 'express-validator';
-import { application } from 'express';
 import { db } from '../config/db';
 
 describe("GET /api", () => {

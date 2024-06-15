@@ -1,7 +1,11 @@
 import express from "express"
+import { Express } from 'express';
+import swaggerUi from 'swagger-ui-express';
 import router from "./routes"
 import { db } from "./config/db"
 import colors from "colors"
+import { swaggerSpec } from "./config/swagger";
+
 
 
 export async function connectDB() {
@@ -21,7 +25,5 @@ server.use(express.json())
 
 server.use("/api/products", router)
 
-server.get("/api", (req, res) => {
-    res.json({ message: "Desde API" })
-})
 
+server.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
