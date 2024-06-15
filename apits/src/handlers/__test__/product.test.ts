@@ -7,7 +7,6 @@ describe("POST /api/products", () => {
         expect(response.status).toEqual(400)
         expect(response.body).toHaveProperty("error")
         expect(response.body.error).toHaveLength(4)
-
         expect(response.badRequest).toBe(true)
         expect(response.body.error).not.toHaveProperty("error")
     });
@@ -30,7 +29,6 @@ describe("POST /api/products", () => {
         })
         expect(response.status).toEqual(201)
         expect(response.body).toHaveProperty("data")
-
         expect(response.status).not.toEqual(400)
         expect(response.body).not.toHaveProperty("error")
     });
@@ -42,16 +40,13 @@ describe("GET /api/products", () => {
     it('should check if /api exist', async () => {
         const response = await request(server).get("/api/products")
         expect(response.status).not.toBe(404)
-
     });
 
     it('should get all products', async () => {
         const response = await request(server).get("/api/products")
-
         expect(response.status).toBe(200)
         expect(response.headers["content-type"]).toMatch(/json/)
         expect(response.body).toHaveProperty("data")
-
         expect(response.body).not.toHaveProperty("error")
         expect(response.status).not.toBe(404)
     });
@@ -62,17 +57,14 @@ describe("GET /api/products/:id", () => {
     it('should return a 404 response for no exist', async () => {
         const productId = 200
         const response = await request(server).get(`/api/products/${productId}`)
-
         expect(response.status).toBe(404)
         expect(response.body).toHaveProperty("error")
         expect(response.body.error).toBe("Producto no encontrado")
-
     });
 
     it('should check a valid ID in the URL', async () => {
         const productId = 1
         const response = await request(server).get(`/api/products/no-validate`)
-
         expect(response.status).toBe(400)
         expect(response.body).toHaveProperty("error")
         expect(response.body.error).toHaveLength(1)
@@ -81,7 +73,6 @@ describe("GET /api/products/:id", () => {
 
     it('should a single product', async () => {
         const response = await request(server).get(`/api/products/1`)
-
         expect(response.status).toBe(200)
         expect(response.body).toHaveProperty("data")
     });
@@ -90,13 +81,11 @@ describe("GET /api/products/:id", () => {
 
 describe("PUT /api/products/:id", () => {
     it('should check a valid ID in the URL', async () => {
-
         const response = await request(server).put(`/api/products/no-validate`).send({
             name: "smart tv",
             price: 300,
             active: true,
         })
-
         expect(response.status).toBe(400)
         expect(response.body).toHaveProperty("error")
         expect(response.body.error).toHaveLength(1)
@@ -106,11 +95,9 @@ describe("PUT /api/products/:id", () => {
 
     it('should validate message error when update product ', async () => {
         const response = await request(server).put(`/api/products/1`).send({})
-
         expect(response.status).toBe(400)
         expect(response.body).toHaveProperty("error")
         expect(response.body.error).toHaveLength(5)
-
         expect(response.status).not.toBe(200)
         expect(response.body).not.toHaveProperty("data")
     });
@@ -121,12 +108,10 @@ describe("PUT /api/products/:id", () => {
             price: 0,
             active: true,
         })
-
         expect(response.status).toBe(400)
         expect(response.body).toHaveProperty("error")
         expect(response.body.error).toHaveLength(1)
         expect(response.body.error[0].msg).toEqual("Precio no valido")
-
         expect(response.status).not.toBe(200)
         expect(response.body).not.toHaveProperty("data")
     });
@@ -138,7 +123,6 @@ describe("PUT /api/products/:id", () => {
             price: 300,
             active: true,
         })
-
         expect(response.status).toBe(404)
         expect(response.body).toHaveProperty("error")
         expect(response.body.error).toBe("Producto no encontrado")
@@ -146,4 +130,46 @@ describe("PUT /api/products/:id", () => {
         expect(response.status).not.toBe(200)
         expect(response.body).not.toHaveProperty("data")
     });
+
+    it('should update a existing product with validate data', async () => {
+        const response = await request(server).put(`/api/products/1`).send({
+            name: "smart tv",
+            price: 300,
+            active: true,
+        })
+        expect(response.status).toBe(200)
+        expect(response.body).toHaveProperty("data")
+        expect(response.status).not.toBe(400)
+        expect(response.body).not.toHaveProperty("error")
+    });
 });
+
+
+describe("DELETE api/products/:id", () => {
+    it('should check a validate ID', async () => {
+        const response = await request(server).delete(`/api/products/no-validate`)
+
+        expect(response.status).toEqual(400)
+        expect(response.body).toHaveProperty("error")
+        expect(response.body.error[0].msg).toBe("Id no valido")
+    });
+
+    it('should return a 404 response for no exist', async () => {
+        const productId = 200
+        const response = await request(server).delete(`/api/products/${productId}`)
+
+        expect(response.status).toBe(404)
+        expect(response.body).toHaveProperty("error")
+        expect(response.body.error).toBe("Producto no encontrado")
+        expect(response.status).not.toBe(200)
+    });
+
+    it('should delete a product ', async () => {
+        const response = await request(server).delete(`/api/products/1`)
+        expect(response.status).toBe(200)
+        expect(response.body).toHaveProperty("data")
+        expect(response.body.data).toBe("Producto eliminado")
+        expect(response.status).not.toBe(400)
+        expect(response.body.error).not.toBe("Producto no encontrado")
+    });
+})
