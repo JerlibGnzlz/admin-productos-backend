@@ -145,6 +145,35 @@ describe("PUT /api/products/:id", () => {
 });
 
 
+describe("PATH  api/products/:id ", () => {
+
+    it('should return a 404 response for a non-existing product ', async () => {
+        const producId = 2000
+        const response = await request(server).patch(`/api/products/${producId}`)
+        expect(response.status).toEqual(404)
+        expect(response.body).toHaveProperty("error")
+        expect(response.body.error).toBe("Producto no encontrado")
+        expect(response.status).not.toEqual(200)
+        expect(response.body).not.toHaveProperty("data")
+
+
+    });
+
+    it('should return no exist product ', async () => {
+        const response = await request(server).patch(`/api/products/no-validate`)
+        expect(response.status).toEqual(400)
+        expect(response.body).toHaveProperty("error")
+        expect(response.body.error[0].msg).toBe("Id no valido")
+    });
+
+    it('should update the product active ', async () => {
+        const response = await request(server).patch(`/api/products/1`)
+        expect(response.status).toBe(200)
+        expect(response.body).toHaveProperty("data")
+
+    });
+})
+
 describe("DELETE api/products/:id", () => {
     it('should check a validate ID', async () => {
         const response = await request(server).delete(`/api/products/no-validate`)
