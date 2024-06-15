@@ -77,7 +77,6 @@ describe("GET /api/products/:id", () => {
         expect(response.body).toHaveProperty("error")
         expect(response.body.error).toHaveLength(1)
         expect(response.body.error[0].msg).toBe("Id no valido")
-
     });
 
     it('should a single product', async () => {
@@ -87,3 +86,64 @@ describe("GET /api/products/:id", () => {
         expect(response.body).toHaveProperty("data")
     });
 })
+
+
+describe("PUT /api/products/:id", () => {
+    it('should check a valid ID in the URL', async () => {
+
+        const response = await request(server).put(`/api/products/no-validate`).send({
+            name: "smart tv",
+            price: 300,
+            active: true,
+        })
+
+        expect(response.status).toBe(400)
+        expect(response.body).toHaveProperty("error")
+        expect(response.body.error).toHaveLength(1)
+        expect(response.body.error[0].msg).toBe("Id no valido")
+    });
+
+
+    it('should validate message error when update product ', async () => {
+        const response = await request(server).put(`/api/products/1`).send({})
+
+        expect(response.status).toBe(400)
+        expect(response.body).toHaveProperty("error")
+        expect(response.body.error).toHaveLength(5)
+
+        expect(response.status).not.toBe(200)
+        expect(response.body).not.toHaveProperty("data")
+    });
+
+    it('should validate that price is > 0 ', async () => {
+        const response = await request(server).put(`/api/products/1`).send({
+            name: "smart tv",
+            price: 0,
+            active: true,
+        })
+
+        expect(response.status).toBe(400)
+        expect(response.body).toHaveProperty("error")
+        expect(response.body.error).toHaveLength(1)
+        expect(response.body.error[0].msg).toEqual("Precio no valido")
+
+        expect(response.status).not.toBe(200)
+        expect(response.body).not.toHaveProperty("data")
+    });
+
+    it('should return a 404 response for not exist product', async () => {
+        const productId = 200
+        const response = await request(server).put(`/api/products/${productId}`).send({
+            name: "smart tv",
+            price: 300,
+            active: true,
+        })
+
+        expect(response.status).toBe(404)
+        expect(response.body).toHaveProperty("error")
+        expect(response.body.error).toBe("Producto no encontrado")
+
+        expect(response.status).not.toBe(200)
+        expect(response.body).not.toHaveProperty("data")
+    });
+});
