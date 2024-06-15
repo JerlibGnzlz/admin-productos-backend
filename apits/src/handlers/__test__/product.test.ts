@@ -170,6 +170,11 @@ describe("PATH  api/products/:id ", () => {
         const response = await request(server).patch(`/api/products/1`)
         expect(response.status).toBe(200)
         expect(response.body).toHaveProperty("data")
+        expect(response.body.data.active).toBe(false)
+
+        expect(response.status).not.toBe(404)
+        expect(response.body).not.toHaveProperty("error")
+        expect(response.body.data.active).not.toBe(true)
 
     });
 })
