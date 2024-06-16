@@ -3,7 +3,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 
 const options: swaggerJSDoc.Options = {
     definition: {
-        openapi: '3.0.0',
+        openapi: '3.0.2',
         tags: [
             {
                 name: "Products",
@@ -16,7 +16,8 @@ const options: swaggerJSDoc.Options = {
             description: 'Documentación de mi API',
         },
     },
-    apis: ['./src/routes/*.ts'],
+
+    apis: ['./src/routes.ts'],
 
 };
 export const swaggerSpec = swaggerJSDoc(options);

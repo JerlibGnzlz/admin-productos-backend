@@ -4,7 +4,14 @@ import { allProduct, createProduct, deleteProducts, getProductById, updateActive
 import { handleError } from "./middlewares";
 
 const router = Router()
-
+/**
+ * @swagger
+ * components:
+ *      schemas:
+ *         Product: 
+ * 
+ * 
+ */
 
 router.get("/", allProduct)
 
