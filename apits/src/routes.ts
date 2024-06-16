@@ -9,8 +9,24 @@ const router = Router()
  * components:
  *      schemas:
  *         Product: 
- * 
- * 
+ *              type: object
+ *              properties:
+ *                  id:
+ *                      type: integer
+ *                      description: the Product ID
+ *                      example: 1 
+ *                  name: 
+ *                       type: string
+ *                       description: the Product name
+ *                       example: Monitor Curvo 
+ *                  price:
+ *                      type: number
+ *                      description: the Product price
+ *                      example: 2000 
+ *                  active:
+ *                      type: boolean
+ *                      description: the Product active
+ *                      example: true 
  */
 
 router.get("/", allProduct)
