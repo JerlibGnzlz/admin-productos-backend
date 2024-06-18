@@ -39,21 +39,11 @@ const router = Router()
  *     responses:
  *       200:
  *        description: Successful response
+ * 
  *
  */
 // /**
-//  * @swagger
-//  * /api/products:
-//  *          get:
-//  *        summary: Get a list of products
-//  *        tags:
-//  *           -Products
-//  *         description: Return a list of products
-//  *           response:
-//  *             200:
-//  *              description: Successful response
-//  *          
-//  */
+
 
 router.get("/", allProduct)
 
