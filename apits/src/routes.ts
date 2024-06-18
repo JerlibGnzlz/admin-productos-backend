@@ -31,22 +31,41 @@ const router = Router()
 
 
 
+// /**
+//  * @swagger
+//  * /api/products:
+//  *   get:
+//  *     summary: Get a list of products
+//  *     responses:
+//  *       200:
+//  *        description: Successful response
+//  *          content:
+//  *             application/json:
+//  *                  schema:
+//  *                      type:array
+//  *                      items:
+//  *
+//  */
+
+
 /**
  * @swagger
- * /api/products:
+ *  /api/products:
  *   get:
  *     summary: Get a list of products
+ *     
  *     responses:
- *       200:
- *        description: Successful response
- * 
- *
+ *       '200':
+ *         description: Succesful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *                  type: array
+ *                  items:
+ *                   $ref: '#/components/schemas/Product'  
  */
-// /**
-
 
 router.get("/", allProduct)
-
 router.get("/:id",
     param("id")
         .isInt().withMessage("Id no valido"),
