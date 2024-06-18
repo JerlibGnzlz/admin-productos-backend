@@ -29,6 +29,22 @@ const router = Router()
  *                      example: true 
  */
 
+
+
+/**
+ * @swagger
+ * /api/products:
+ *      get:
+ *        summary: Get a list of products
+ *      tags:
+ *         -Products
+//  *         description: Return a list of products
+ *          response:
+ *       200:
+ *           description: Successful response
+ *          
+ */
+
 router.get("/", allProduct)
 
 router.get("/:id",
