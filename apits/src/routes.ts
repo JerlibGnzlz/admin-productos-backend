@@ -111,7 +111,7 @@ router.get("/:id",
  *                              price:
  *                                  type: integer
  *                                  example: "10000"
-*      responses:
+ *      responses:
  *          201:
  *              description: Product create sussceful
  *          400:
@@ -129,6 +129,53 @@ router.post("/",
     handleError,
     createProduct
 )
+
+/**
+ * @swagger
+ * /api/products/{id}:
+ *  put:
+ *      summary: Update a product with input
+ *      tags:
+ *          - Products
+ *      description: Update a product
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          description: the Id of the product
+ *          required: true
+ *          schema:
+ *              type: integer
+ *      requestBody:
+ *          required: true
+ *          content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties: 
+ *                              name:       
+ *                                  type: string
+ *                                  example: "Monitor Curvo 40"
+ *                              price:
+ *                                  type: integer
+ *                                  example: "10000"
+ *                              active:
+ *                                  type: boolean
+ *                                  example: true
+ *      responses:
+ *          200:
+ *              description: Succesful Response
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/Product' 
+ *          400:
+ *              description: Bad Request
+ *          404:
+ *              description: Not Found
+ * 
+ * 
+ */
+
 
 router.put("/:id",
     param("id")
