@@ -31,23 +31,6 @@ const router = Router()
 
 
 
-// /**
-//  * @swagger
-//  * /api/products:
-//  *   get:
-//  *     summary: Get a list of products
-//  *     responses:
-//  *       200:
-//  *        description: Successful response
-//  *          content:
-//  *             application/json:
-//  *                  schema:
-//  *                      type:array
-//  *                      items:
-//  *
-//  */
-
-
 /**
  * @swagger
  *  /api/products:
@@ -95,11 +78,7 @@ router.get("/", allProduct)
  *          404:
  *              description: Not found
  *          400:
- *              description: Bad Request - Invalid ID
- * 
- *      
- * 
- * 
+ *              description: Bad Request - Invalid ID 
  */
 
 
@@ -110,6 +89,36 @@ router.get("/:id",
     getProductById
 )
 
+
+/**
+ * @swagger
+ * /api/products/:
+ *  post:
+ *      summary: Create a product
+ *      tags:
+ *          - Products
+ *      description: Return a new product
+ *      requestBody:
+ *          required: true
+ *          content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties: 
+ *                              name:       
+ *                                  type: string
+ *                                  example: "Monitor Curvo 40"
+ *                              price:
+ *                                  type: integer
+ *                                  example: "10000"
+*      responses:
+ *          201:
+ *              description: Product create sussceful
+ *          400:
+ *              description: Bad Request
+ * 
+ * 
+ */
 
 router.post("/",
     body("name").notEmpty().withMessage("El nombre del producto no puede estar vacio"),
