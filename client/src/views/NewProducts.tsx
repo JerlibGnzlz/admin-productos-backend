@@ -1,22 +1,28 @@
-import { Link, Form, useActionData } from "react-router-dom"
+import { Link, Form, useActionData, redirect, ActionFunctionArgs } from "react-router-dom"
+import ErrorMessage from "../components/ErrorMessage"
+import { addProduct } from "../services/ProductServices"
 
-export async function action({ request }) {
+export async function action({ request }: ActionFunctionArgs) {
     const data = Object.fromEntries(await request.formData())
+
+
     let error = ""
     if (Object.values(data).includes("")) {
         error = "Todos los campos son requeridos"
     }
-    if (EvalError.length) {
+    if (error.length) {
         return error
     }
-    return {}
+
+    addProduct(data)
+
+    return redirect("/")
 }
 
 
 const NewProducts = () => {
 
-    const error = useActionData()
-    console.log(error)
+    const error = useActionData() as string
 
 
     return (
@@ -27,8 +33,11 @@ const NewProducts = () => {
                     className="rounded-md bg-slate-400 p-2 uppercase font-bold hover:bg-slate-500 "
                     to={"/"}>
                     volver a Producto
+
                 </Link>
             </div>
+
+            {error && <ErrorMessage>{error}</ErrorMessage>}
 
             <Form
                 method="post"
