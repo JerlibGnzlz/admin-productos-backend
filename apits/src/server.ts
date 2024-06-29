@@ -5,6 +5,7 @@ import { db } from "./config/db"
 import colors from "colors"
 import { swaggerSpec } from "./config/swagger";
 import cors, { CorsOptions } from 'cors';
+import morgan from "morgan"
 
 
 
@@ -35,7 +36,10 @@ const corsOptions: CorsOptions = {
 
 server.use(cors(corsOptions))
 
+server.use(morgan("dev"))
+
 server.use(express.json())
+
 
 server.use("/api/products", router)
 
