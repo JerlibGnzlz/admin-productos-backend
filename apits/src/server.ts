@@ -1,10 +1,10 @@
 import express from "express"
-import { Express } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import router from "./routes"
 import { db } from "./config/db"
 import colors from "colors"
 import { swaggerSpec } from "./config/swagger";
+import cors, { CorsOptions } from 'cors';
 
 
 
@@ -20,6 +20,20 @@ export async function connectDB() {
 connectDB()
 
 export const server = express()
+
+const corsOptions: CorsOptions = {
+    origin: function (origin, callback) {
+        if (origin === process.env.FRONTEND_URL) {
+            callback(null, true)
+        } else {
+            callback(new Error("Error de CORS"))
+        }
+    },
+    // methods: ['GET', 'POST', "PUT", "DELETE"],
+};
+
+
+server.use(cors(corsOptions))
 
 server.use(express.json())
 
