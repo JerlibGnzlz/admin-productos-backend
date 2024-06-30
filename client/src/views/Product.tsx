@@ -1,15 +1,18 @@
-import { Link } from "react-router-dom"
+import { Link, useLoaderData } from "react-router-dom"
 import { getProducts } from "../services/ProductServices"
+import ProductDetail from "../components/ProductDetail"
 
 
-export const Loader = async () => {
-    await getProducts()
+export const loader = async () => {
+    const products = await getProducts()
+    return products
 
-
-    return {}
 }
 
 const Product = () => {
+
+    const products = useLoaderData() as Product[]
+
     return (
         <>
             <div className="flex justify-between">
@@ -19,6 +22,28 @@ const Product = () => {
                     to={"/producto/nuevo"}>
                     Agregar Producto
                 </Link>
+            </div>
+
+
+            <div className="p-2">
+                <table className="w-full mt-5 table-auto">
+                    <thead className="bg-slate-800 text-white">
+                        <tr>
+                            <th className="p-2">Producto</th>
+                            <th className="p-2">Precio</th>
+                            <th className="p-2">Disponibilidad</th>
+                            <th className="p-2">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {products.map(product => (
+                            <ProductDetail
+                                key={product.id}
+                                product={product}
+                            />
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </>
     )

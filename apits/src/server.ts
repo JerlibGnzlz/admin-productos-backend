@@ -36,10 +36,10 @@ const corsOptions: CorsOptions = {
 
 server.use(cors(corsOptions))
 
-server.use(morgan("dev"))
 
 server.use(express.json())
 
+server.use(morgan("dev"))
 
 server.use("/api/products", router)
 
