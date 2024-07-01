@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Product } from "../types"
-import EditProduct from "../views/EditProduct"
 
 type Props = {
     product: Product
@@ -8,10 +7,12 @@ type Props = {
 
 const ProductDetail = ({ product }: Props) => {
 
+    const navigate = useNavigate()
+
     const isActive = product.active
 
     return (
-        <tr className="border-b ">
+        <tr className="border-b">
             <td className="p-3 text-lg text-gray-800">
                 {product.name}
             </td>
@@ -23,11 +24,15 @@ const ProductDetail = ({ product }: Props) => {
             </td>
             <td className="p-3 text-lg text-gray-800 ">
                 <div className="flex items-center">
-                    <button >
-                        <Link
-                            to={`producto/${id}/edit`}>
-                            Editar
-                        </Link>
+                    <button
+                        className="h-full w-full text-center mt-5  bg-green-400   hover:bg-green-600  p-2  font-bold text-lg cursor-pointer rounded uppercase mr-2"
+                        onClick={() => navigate(`producto/${product.id}/edit`)}>
+                        Editar
+                    </button>
+                    <button
+                        className="h-full w-full text-center mt-5  bg-red-400   hover:bg-red-500  p-2  font-bold text-lg cursor-pointer rounded uppercase"
+                        onClick={() => navigate(`producto/${product.id}/edit`)}>
+                        Eliminar
                     </button>
                 </div>
             </td>
