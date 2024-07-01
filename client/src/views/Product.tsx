@@ -1,7 +1,7 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import { getProducts } from "../services/ProductServices"
 import ProductDetail from "../components/ProductDetail"
-import { Product } from "../types"
+import { type Product } from "../types"
 
 
 export async function loader() {
