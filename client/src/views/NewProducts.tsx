@@ -2,7 +2,7 @@ import { Link, Form, useActionData, redirect, ActionFunctionArgs } from "react-r
 import ErrorMessage from "../components/ErrorMessage"
 import { addProduct } from "../services/ProductServices"
 
-export const Action = async ({ request }: ActionFunctionArgs) => {
+export const action = async ({ request }: ActionFunctionArgs) => {
     const data = Object.fromEntries(await request.formData())
 
 
