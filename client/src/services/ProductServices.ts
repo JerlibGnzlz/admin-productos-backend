@@ -1,5 +1,6 @@
-import { number, safeParse, coerce, parse } from 'valibot';
-import { DraftProductSchema, ProductsSchema, Product, ProductSchema } from "../types";
+import { number, safeParse, parse } from 'valibot';
+
+import { DraftProductSchema, ProductsSchema, Product, ProductSchema, ProductSchemaZod } from "../types";
 import axios from "axios";
 import { toBoolean } from '../utils';
 
@@ -72,15 +73,17 @@ export const updateProduct = async (data: ProductData, id: Product["id"]) => {
         // const url = `${import.meta.env.VITE_API_URL}/api/products/${id}`
         // const { data } = await axios(url)
 
-        const NumberSchema = (coerce(number(), Number))
-        const result = safeParse(ProductSchema, {
+        // const NumberSchema = (z.coerce(number(), Number))
+        const result = safeParse(ProductSchemaZod, safeParse({
             id,
             name: data.name,
-            price: parse(NumberSchema(data.price)),
-            active: toBoolean(data.active.toString()),
-            // active: data.active,
-        })
-        console.log(result)
+            price: data.price,
+            active: data.active
+        }))
+        if (result.issues) {
+
+            console.log(result)
+        }
     } catch (error) {
         console.log(error)
     }
