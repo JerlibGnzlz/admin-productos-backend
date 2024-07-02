@@ -62,3 +62,18 @@ export const getProductsById = async (id: Product["id"]) => {
         console.log(error)
     }
 }
+
+export const updateProduct = async (id: Product["id"], data: ProductData) => {
+    // try {
+    //     const url = `${import.meta.env.VITE_API_URL}/api/products/${id}`
+    //     const { data } = await axios(url)
+    //     const result = safeParse(ProductSchema, data.data)
+    //     if (result.success) {
+    //         return result.output
+    //     } else {
+    //         throw new Error("Hubo un error")
+    //     }
+    // } catch (error) {
+    //     console.log(error)
+    // }
+}
