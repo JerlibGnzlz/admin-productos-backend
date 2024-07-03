@@ -16,8 +16,8 @@ export const ProductSchema = object({
 export const ProductSchemaZod = z.object({
     id: z.number(),
     name: z.string(),
-    price: z.number().nonnegative(),
-    active: z.boolean().optional().default(false),
+    price: z.number(),
+    active: z.boolean()
 })
 
 

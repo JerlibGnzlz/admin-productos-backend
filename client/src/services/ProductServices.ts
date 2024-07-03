@@ -67,26 +67,22 @@ export const getProductsById = async (id: Product["id"]) => {
 
 export const updateProduct = async (data: ProductData, id: number) => {
 
-
     try {
-        // const url = `${import.meta.env.VITE_API_URL}/api/products/${id}`
-        // const { data } = await axios(url)
-
-        // const NumberSchema = coerce(number(), Number)
         const result = ProductSchemaZod.parse({
             id,
             name: data.name,
             price: Number(data.price),
-            // active: toBoolean(data.active.toString())
-            // active: data.active ?? false,
+            active: toBoolean(data.active.toString())
         })
         console.log(result)
-        // if (result.success) {
+        if (result) {
+            const url = `${import.meta.env.VITE_API_URL}/api/products/${id}`
+            await axios.put(url, data)
 
-        //     return result.data
-        // } else {
-        //     throw new Error("Hubo un error")
-        // }
+            return result
+        } else {
+            throw new Error("Hubo un error")
+        }
     } catch (error) {
         console.log(error)
     }

@@ -99,16 +99,18 @@ const EditProduct = () => {
                 <div className="mb-4">
                     <label
                         className="text-gray-800"
-                        htmlFor="availability"
+                        htmlFor="active"
                     >Disponibilidad:</label>
                     <select
-                        id="availability"
+                        id="active"
                         className="mt-2 block w-full p-3 bg-gray-50"
-                        name="availability"
+                        name="active"
                         defaultValue={product?.active.toString()}
                     >
                         {activeOptions.map(option => (
-                            <option key={option.name} value={option.value.toString()}>{option.name}</option>
+                            <option key={option.name}
+                                value={option.value.toString()}>
+                                {option.name}</option>
                         ))}
                     </select>
                 </div>

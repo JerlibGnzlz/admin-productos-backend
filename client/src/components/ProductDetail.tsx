@@ -20,7 +20,7 @@ const ProductDetail = ({ product }: Props) => {
                 $ {product.price}
             </td>
             <td className="p-3 text-lg text-gray-800">
-                {isActive ? "Disponible" : "No disponible"}
+                {isActive ? "Disponible" : "No Disponible"}
             </td>
             <td className="p-3 text-lg text-gray-800 ">
                 <div className="flex items-center">
