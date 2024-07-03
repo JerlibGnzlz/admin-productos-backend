@@ -5,7 +5,6 @@
  "main": "index.js",
  "scripts": {
   "dev": "nodemon --exec ts-node src/index.ts",
-  "start": "node index.js",
   "build": "tsc",
   "test": "jest --detectOpenHandles",
   "test:coverage": "npm run pretest && jest --detectOpenHandles --coverage",

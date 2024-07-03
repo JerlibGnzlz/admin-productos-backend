@@ -5,7 +5,7 @@ dotenv.config()
 const { DB } = process.env
 
 export const db = new Sequelize(DB, {
-    models: [__dirname + "/../models/**/*.ts"],
+    models: [__dirname + "/../models/**/*"],
     logging: false
 })
 
