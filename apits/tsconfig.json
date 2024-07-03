@@ -3,7 +3,7 @@
     "target": "ESNext",
     "moduleResolution": "NodeNext",
     "module": "NodeNext",
-    "outDir": "dist",
+    "outDir": "./dist",
     "rootDir": "./src/",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
