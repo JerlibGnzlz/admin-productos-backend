@@ -2,6 +2,7 @@ import { Link, Form, useActionData, redirect, ActionFunctionArgs, useLoaderData,
 import ErrorMessage from "../components/ErrorMessage"
 import { getProductsById, updateProduct } from "../services/ProductServices"
 import { Product } from "../types"
+import ProductForm from "../components/ProductForm"
 
 
 
@@ -66,35 +67,9 @@ const EditProduct = () => {
                 className="mt-10"
             >
 
-                <div className="mb-4">
-                    <label
-                        className="text-gray-800"
-                        htmlFor="name"
-                    >Nombre Producto:</label>
-                    <input
-                        id="name"
-                        type="text"
-                        className="mt-2 block w-full p-3 bg-gray-50"
-                        placeholder="Nombre del Producto"
-                        name="name"
-                        defaultValue={product.name}
-                    />
-
-                </div>
-                <div className="mb-4">
-                    <label
-                        className="text-gray-800"
-                        htmlFor="price"
-                    >Precio:</label>
-                    <input
-                        id="price"
-                        type="number"
-                        className="mt-2 block w-full p-3 bg-gray-50"
-                        placeholder="Precio Producto. ej. 200, 300"
-                        name="price"
-                        defaultValue={product.price}
-                    />
-                </div>
+                <ProductForm
+                    product={product}
+                />
 
                 <div className="mb-4">
                     <label
@@ -119,7 +94,7 @@ const EditProduct = () => {
                 <input
                     type="submit"
                     className="mt-5 w-full bg-slate-400   hover:bg-slate-500  p-2  font-bold text-lg cursor-pointer rounded"
-                    value="Registrar Producto"
+                    value="Guardar Producto"
                 />
             </Form>
         </>
