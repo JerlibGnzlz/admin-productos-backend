@@ -6,7 +6,9 @@ const { DB } = process.env
 
 export const db = new Sequelize(DB, {
     models: [__dirname + "/../models/**/*"],
-    logging: false
+    logging: false,
+    ssl: true
+
 })
 
 
