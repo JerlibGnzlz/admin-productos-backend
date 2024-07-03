@@ -16,11 +16,13 @@ export const ProductSchema = object({
 export const ProductSchemaZod = z.object({
     id: z.number(),
     name: z.string(),
-    price: z.coerce.number(),
-    active: z.boolean(),
+    price: z.number().nonnegative(),
+    active: z.boolean().optional().default(false),
 })
 
 
 export type Product = Output<typeof ProductSchema>
 
 export const ProductsSchema = array(ProductSchema)
+
+

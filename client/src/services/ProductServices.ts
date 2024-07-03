@@ -1,5 +1,4 @@
-import { number, safeParse, parse } from 'valibot';
-
+import { safeParse } from 'valibot';
 import { DraftProductSchema, ProductsSchema, Product, ProductSchema, ProductSchemaZod } from "../types";
 import axios from "axios";
 import { toBoolean } from '../utils';
@@ -66,24 +65,28 @@ export const getProductsById = async (id: Product["id"]) => {
     }
 }
 
-export const updateProduct = async (data: ProductData, id: Product["id"]) => {
+export const updateProduct = async (data: ProductData, id: number) => {
 
 
     try {
         // const url = `${import.meta.env.VITE_API_URL}/api/products/${id}`
         // const { data } = await axios(url)
 
-        // const NumberSchema = (z.coerce(number(), Number))
-        const result = safeParse(ProductSchemaZod, safeParse({
+        // const NumberSchema = coerce(number(), Number)
+        const result = ProductSchemaZod.parse({
             id,
             name: data.name,
-            price: data.price,
-            active: data.active
-        }))
-        if (result.issues) {
+            price: Number(data.price),
+            // active: toBoolean(data.active.toString())
+            // active: data.active ?? false,
+        })
+        console.log(result)
+        // if (result.success) {
 
-            console.log(result)
-        }
+        //     return result.data
+        // } else {
+        //     throw new Error("Hubo un error")
+        // }
     } catch (error) {
         console.log(error)
     }

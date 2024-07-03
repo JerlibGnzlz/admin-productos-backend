@@ -29,7 +29,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         return error
     }
     if (params.id !== undefined) {
-        await updateProduct(data, params.id)
+        await updateProduct(data, +params.id)
         return redirect("/")
     }
 
@@ -56,7 +56,6 @@ const EditProduct = () => {
                     className="rounded-md bg-slate-400 p-2 uppercase font-bold hover:bg-slate-500 "
                     to={"/"}>
                     volver a Producto
-
                 </Link>
             </div>
 
