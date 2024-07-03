@@ -2,7 +2,7 @@
 
 
 interface Props {
-
+    children: React.ReactNode;
 }
 
 export default function ErrorMessage({ children }: Props) {
