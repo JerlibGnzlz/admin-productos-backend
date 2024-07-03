@@ -17,16 +17,25 @@ const ProductDetail = ({ product }: Props) => {
 
     return (
         <tr className="border-b">
-            <td className="p-3 text-lg text-gray-800">
+            <td className="p-3  text-center text-lg text-gray-800">
                 {product.name}
             </td>
-            <td className="p-3 text-lg text-gray-800">
+            <td className="p-3  text-center text-lg text-gray-800">
                 $ {product.price}
             </td>
-            <td className="p-3 text-lg text-gray-800">
-                {isActive ? "Disponible" : "No Disponible"}
+            <td className="p-3 text-lg  text-gray-800">
+                <form action="" method="post">
+                    <button
+                        type="button"
+                        name="active"
+                        value={product.active.toString()}
+                        className={`${isActive ? "text-blue-700" : "text-red-800"} mt-4 p-2 rounded-md uppercase font-bold w-full border border-black`}
+                    >
+                        {isActive ? "Disponible" : "No Disponible"}
+                    </button>
+                </form>
             </td>
-            <td className="p-3 text-lg text-gray-800 ">
+            <td className="text-md text-gray-800 ">
                 <div className="flex items-center">
                     <button
                         className="h-full w-full text-center mt-5  bg-green-400   hover:bg-green-600  p-2  font-bold text-lg cursor-pointer rounded uppercase mr-2"
