@@ -26,7 +26,8 @@ export const router = createBrowserRouter([
                 element: <EditProduct />,
                 loader: editarLoader,
                 action: editarProductAction
-            }, {
+            },
+            {
                 path: "producto/:id/eliminar",
                 action: deleteProductDetail
             }
