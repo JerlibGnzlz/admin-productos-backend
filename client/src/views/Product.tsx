@@ -1,7 +1,8 @@
-import { Link, useLoaderData } from 'react-router-dom';
-import { getProducts } from "../services/ProductServices"
+import { ActionFunctionArgs, Link, useLoaderData } from 'react-router-dom';
+import { getProducts, updateProductActive } from "../services/ProductServices"
 import ProductDetail from "../components/ProductDetail"
 import { type Product } from "../types"
+import request from 'supertest';
 
 
 export async function loader() {
@@ -9,6 +10,12 @@ export async function loader() {
     return products
 }
 
+
+export async function action({ request }: ActionFunctionArgs) {
+    const data = Object.fromEntries(await request.formData())
+    await updateProductActive(+data.id)
+    return {}
+}
 const Product = () => {
 
     const products = useLoaderData() as Product[]

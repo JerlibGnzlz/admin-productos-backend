@@ -12,7 +12,10 @@ export const createProduct = async (req: Request, res: Response) => {
 
 export const allProduct = async (req: Request, res: Response) => {
     const products = await Product.findAll({
-        attributes: { exclude: ["createdAt", "updatedAt"] }
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+        order: [
+            ["id", "DESC"]
+        ]
     })
 
     res.json({ data: products })
