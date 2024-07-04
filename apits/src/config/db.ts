@@ -7,11 +7,11 @@ const { DB } = process.env
 export const db = new Sequelize(DB, {
     models: [__dirname + "/../models/**/*"],
     logging: false,
-    // dialectOptions: {
-    //     ssl: {
-    //         require: true
-    //     }
-    // }
+    dialectOptions: {
+        ssl: {
+            require: true
+        }
+    }
 })
 
 
